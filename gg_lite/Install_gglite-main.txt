@@ -1,0 +1,65 @@
+Board Setup
+-----------
+
+The target board for AWS Greengrass Nucleus Lite is the STM32MP135-DK.
+
+This note assumes that the latest OpenSTLinux release 6 is being used:
+
+https://wiki.st.com/stm32mpu/wiki/Main_Page
+
+The starter package has been installed on the board:
+
+https://wiki.st.com/stm32mpu/wiki/Getting_started/STM32MP1_boards/STM32MP135x-DK/Let%27s_start
+
+For building from source please see [TBD X-LINUX-AWS future version or document]
+
+Download the following from [insert Git ref]:
+gglite.gz
+sample-component.gz
+libzip_1.10.1-r0.0_armhf.deb
+uriparser_0.9.8-r0.0_armhf.deb
+run_nucleus
+
+Install on board
+----------------
+
+scp the above downloaded files to the board:
+
+scp gglite.gz root@192.168.1.26:~/.
+scp sample-component.gz root@192.168.1.26:~/.
+scp libzip_1.10.1-r0.0_armhf.deb root@192.168.1.26:~/.
+scp uriparser_0.9.8-r0.0_armhf.deb root@192.168.1.26:~/.
+scp run_nucleus root@192.168.1.26:~/.
+
+Decompress/Install on the board:
+
+dpkg -i <package_name.deb>
+
+tar xvf gglite.gz
+tar xvf sample-component.gz
+
+Update systemd as follows:
+cp aws-greengrass-lite/lib/systemd/system/* /lib/systemd/system/.
+
+Setup environment on board
+--------------------------
+
+At this point follow the steps in https://github.com/aws-greengrass/aws-greengrass-lite/blob/v2.0.0/docs/SETUP.md to setup the environment, with the exceptions below.
+
+For running on the STM32MP135-DK the following directory needs to be created if your Greengrass rootpath is /var/lib/greengrass
+
+To run the Greengrass Nucleus Lite core services for testing, run the run_nucleus script.
+
+./run_nucleus
+
+For the example local deployment the following command is used:
+
+aws-greengrass-lite/bin/ggl-cli deploy --recipe-dir /home/root/sample-component/recipes --artifacts-dir /home/root/sample-component/artifacts --add-component com.example.SampleComponent=1.0.0
+
+/var/lib/netdata/
+
+
+
+
+
+

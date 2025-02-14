@@ -1,0 +1,19 @@
+{
+    "BoardConfiguration": {
+      "BOARD_IP": "",
+      "REMOTE_SCRIPT_PATH": "~/"
+    },
+    "IoTConfiguration": {
+      "THING_NAME": "",
+      "THING_GROUP_NAME": "",
+      "AWS_IOT_POLICY": "MyGreengrassV2IoTThingPolicy",
+      "ROLE_ALIAS_NAME": "MyGreengrassCoreTokenExchangeRoleAlias",
+      "EXCHANGE_ROLE_POLICY": "MyGreengrassV2TokenExchangeRoleAccess",
+      "ROLE_NAME": "MyGreengrassV2TokenExchangeRole",
+      "IOT_ROLE_ALIAS_POLICY_NAME": "MyGreengrassCoreTokenExchangeRoleAliasPolicy",
+      "REGION": "", 
+      "DATA_ENDPOINT": "",
+      "CRED_ENDPOINT": ""
+    }
+  }
+  

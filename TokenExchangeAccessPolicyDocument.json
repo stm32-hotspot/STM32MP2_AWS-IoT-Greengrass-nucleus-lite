@@ -1,0 +1,44 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "logs:CreateLogGroup",
+                "logs:CreateLogStream",
+                "logs:PutLogEvents",
+                "logs:DescribeLogStreams"
+            ],
+            "Resource": "*"
+        }, 
+        {
+			"Sid": "S3BucketActions",
+			"Effect": "Allow",
+			"Action": [
+				"s3:CreateBucket",
+				"s3:ListAllMyBuckets",
+				"s3:GetBucketLocation",
+				"s3:PutObject",
+				"s3:GetObject"
+			],
+			"Resource": [
+				"arn:aws:s3:::*"
+			]
+		},
+		{
+			"Effect": "Allow",
+			"Action": [
+				"iot:*"
+			],
+			"Resource": "*"
+		},
+		{
+			"Sid": "GreengrassActions",
+			"Effect": "Allow",
+			"Action": [
+				"greengrass:*"
+			],
+			"Resource": "*"
+		}
+    ]
+}

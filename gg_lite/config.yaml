@@ -1,0 +1,19 @@
+---
+system:
+  privateKeyPath: "/home/root/certs/private.key"
+  certificateFilePath: "/home/root/certs/certificate.pem"
+  rootCaPath: "/home/root/certs/AmazonRootCA1.pem"
+  rootPath: "/var/lib/greengrass"
+  thingName: ""
+services:
+  aws.greengrass.NucleusLite:
+    componentType: "NUCLEUS"
+    configuration:
+      awsRegion: ""
+      iotCredEndpoint: ""
+      iotDataEndpoint: ""
+      iotRoleAlias: ""
+      runWithDefault:
+        posixUser: "root:root"
+      greengrassDataPlanePort: "8443"
+      platformOverride: {}
