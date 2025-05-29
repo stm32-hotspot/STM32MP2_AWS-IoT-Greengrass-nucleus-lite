@@ -44,5 +44,6 @@ mkdir -p /etc/greengrass
 cp ${GG_DIR}config.yaml /etc/greengrass
 
 # Run nucleus
+sed -i 's/\r$//' ${GG_DIR}run_nucleus
 chmod +x ${GG_DIR}run_nucleus
 ${GG_DIR}run_nucleus

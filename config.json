@@ -1,7 +1,7 @@
 {
     "BoardConfiguration": {
       "BOARD_IP": "",
-      "REMOTE_SCRIPT_PATH": "~/"
+      "REMOTE_SCRIPT_PATH": "/home/root/"
     },
     "IoTConfiguration": {
       "THING_NAME": "",

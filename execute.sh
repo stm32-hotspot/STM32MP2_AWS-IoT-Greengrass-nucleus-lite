@@ -14,12 +14,16 @@
 # * License. You may obtain a copy of the License at:
 # *                        opensource.org/licenses/BSD-3-Clause
 # ******************************************************************************
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8
 
 # Source the config file
 LOAD_CONFIG_FILE="load_config.sh"
 source $LOAD_CONFIG_FILE
 
 MPU_GG_CONFIG_SCRIPT="5_MPU_RunGGLite.sh"
+
+
 
 # Function to copy file to the board
 copy_file_to_board() {
@@ -55,16 +59,18 @@ source_script_on_board() {
     ssh root@$BOARD_IP "source ${REMOTE_SCRIPT_PATH}${script_name}"
 }
 
-check_ssh(){
-    port=22
 
-    if timeout 5 bash -c "</dev/tcp/$BOARD_IP/$port"; then
+check_ssh() {
+  ssh -o ConnectTimeout=5 root@"$BOARD_IP" "exit" >/dev/null 2>&1
+
+  if [ $? -eq 0 ]; then
       echo "SSH is available on $BOARD_IP"
     else
       echo "SSH is not available on $BOARD_IP"
       exit 1
     fi
 }
+
 
 # Check if remote server is available
 check_ssh
@@ -102,6 +108,7 @@ fi
 
 echo "Copying gg_lite files to STM32MP ..."
 scp -r ./gg_lite root@$BOARD_IP:$REMOTE_SCRIPT_PATH
+ssh root@$BOARD_IP "find '${REMOTE_SCRIPT_PATH}gg_lite/' -type f ! -name '*.gz' ! -name '*.deb' -exec sh -c 'sed \"s/\r\$//\" \"\$0\" > \"\$0.tmp\" && mv \"\$0.tmp\" \"\$0\"' {} \;"
 
 echo "Copying $MPU_GG_CONFIG_SCRIPT to the board..."
 copy_file_to_board $MPU_GG_CONFIG_SCRIPT
